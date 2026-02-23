@@ -1,0 +1,73 @@
+/* loads the entire Tailwind CSS library — all utility classes (flex, text-sm, p-4, etc.) become available */
+@import "tailwindcss";
+
+/* defines CSS variables globally on the <html> element (light mode defaults) */
+/* see Figma Color Scheme for detail */
+:root {
+  /* Color Scheme */
+  --grey: #D9D9D9;
+  --purplegrey: #D9C5D2;
+  --darkgreen: #025959;
+  --neongreen: #0CF2DB;
+  --lightgreen: #0DD9C4;
+  --white: #FFFFFF;
+  --black: #0D0D0D;
+  --readingbg:#E8E6EA;
+
+  /* Fix Width and Height */
+  --taskbar-height: 48px;
+  --startmenu-width: 240px;
+
+  /* Font */
+  --text-xxs: 10px;
+}
+
+/* Tailwind v4: maps CSS variables to Tailwind's utility system
+   e.g. className="font-mono" resolves to --font-ibm-plex-mono
+   e.g. className="bg-background" resolves to var(--color-background)
+   replaces tailwind.config.js from v3 */
+@theme inline {
+  --color-grey: var(--grey);
+  --color-purplegrey: var(--purplegrey);
+  --color-darkgreen: var(--darkgreen);
+  --color-neongreen: var(--neongreen);
+  --color-lightgreen: var(--lightgreen);
+  --color-white: var(--white);
+  --color-black: var(--black);
+  --color-readingbg: var(--readingbg);
+  --font-mono: var(--font-ibm-plex-mono);
+  --text-xxs: var(--text-xxs);
+}
+
+/* overrides :root variables when the user's OS is in dark mode — no JavaScript needed */
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+/* applies base styles to the entire page — these cascade down to all elements */
+body {
+  background: var(--darkgreen);
+  color: var(--black);
+  font-family: var(--font-ibm-plex-mono);
+}
+
+/* custom utility classes */
+/* use @apply to write tailwind classes */
+@utility taskbar-btn-base {
+  @apply text-sm font-bold text-darkgreen border-t-white border-l-white border-b-black border-r-black border-1 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] cursor-pointer;
+}
+
+@utility taskbar-btn-pressed {
+  @apply text-sm font-bold text-darkgreen border-t-black border-l-black border-b-white border-r-white border-1 inset-shadow-[0px_4px_4px_rgba(0,0,0,0.25)] cursor-pointer;
+}
+
+@utility close-btn-base {
+  @apply text-sm font-bold text-darkgreen border-darkgreen border-2 cursor-pointer;
+}
+
+@utility desktop-icon-selected {
+  @apply bg-purplegrey/30 !outline-neongreen !outline-1 !outline-dashed;
+}

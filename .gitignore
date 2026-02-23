@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# custom
+/project-learning.md
+/project-spec.md
+/project-todo.md
+/project-design.md
+/concepts-learning.md
+/design-decisions.md
+
+content/wormDiary/05-vanish.*.md
+content/wormDiary/06-no-spring-womb.*.md
