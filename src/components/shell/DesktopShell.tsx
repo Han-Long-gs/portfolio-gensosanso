@@ -62,7 +62,7 @@ export function DesktopShell() {
                 </div>
                 <TaskBar />
             </div>
-            <ViewportWarning />
+            {/* <ViewportWarning /> */}
         </div>
     );
 }

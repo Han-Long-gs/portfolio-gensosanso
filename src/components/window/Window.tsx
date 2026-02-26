@@ -9,6 +9,9 @@ import { useState } from "react";
 import { useDict } from "@/src/i18n/useDict";
 import { useContentContext } from "@/src/state/ContentContext";
 
+const MIN_WIDTH = 768;
+const MIN_HEIGHT = 500;
+
 export function Window() {
     const dict = useDict();
     const { language, activeWindow, closeWindow } = useAppContext();
@@ -31,6 +34,13 @@ export function Window() {
         return windowSidebarConfig[window];
     }
 
+    function isDesktopVersion() {
+        if (window.innerWidth < MIN_WIDTH || window.innerHeight < MIN_HEIGHT) {
+            return false;
+        }
+        return true;
+    }
+
     function getSlugsAndTitles(window: Exclude<WindowType, null>) {
         if (!isWindowSidebarEnabled(window)) {
             return [];
@@ -46,10 +56,10 @@ export function Window() {
     return (
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[90vw] max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1600px] h-[85vh] max-h-[760px] xl:max-h-[860px] 2xl:max-h-[960px] bg-grey border-darkgreen border-2">
             <div className="flex flex-col w-full h-full p-1">
-                <WindowHeader header={dict.window.header[activeWindow]} onClose={() => closeWindow()} />
+                <WindowHeader header={dict.window.header[activeWindow]} isMobileVersion={!isDesktopVersion()} items={getSlugsAndTitles(activeWindow)} selectedSlug={selectedSlug} setSelectedSlug={setSelectedSlug} onClose={() => closeWindow()} />
                 <div className="flex gap-2 w-full flex-1 min-h-0 mt-2 bg-lightgrey">
                     {/* note: the sidebar is fixed width and the content is flex-1 */}
-                    {isWindowSidebarEnabled(activeWindow) && <WindowSidebar items={getSlugsAndTitles(activeWindow)} selectedSlug={selectedSlug} setSelectedSlug={setSelectedSlug} />}
+                    {isDesktopVersion() && isWindowSidebarEnabled(activeWindow) && <WindowSidebar items={getSlugsAndTitles(activeWindow)} selectedSlug={selectedSlug} setSelectedSlug={setSelectedSlug} />}
                     <WindowContent contentDetail={getContentDetailBySlug(activeWindow, selectedSlug)} />
                 </div>
             </div>

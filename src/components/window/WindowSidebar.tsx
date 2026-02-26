@@ -2,6 +2,7 @@
 
 import { Fragment } from "react";
 
+// this is a window component exclusively for the desktop version
 export function WindowSidebar({ items, selectedSlug, setSelectedSlug }: { items: { slug: string, title: string }[], selectedSlug: string, setSelectedSlug: (slug: string) => void }) {
     // note: items is an array of objects with slug and title properties; e.g. [{ slug: "project1", title: "Project 1" }, { slug: "project2", title: "Project 2" }]
 
