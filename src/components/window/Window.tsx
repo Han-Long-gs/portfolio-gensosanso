@@ -5,7 +5,7 @@ import { WindowContent } from "./WindowContent";
 import { WindowHeader } from "./WindowHeader";
 import { WindowSidebar } from "./WindowSidebar";
 import { WindowType } from "@/src/state/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDict } from "@/src/i18n/useDict";
 import { useContentContext } from "@/src/state/ContentContext";
 
@@ -17,6 +17,19 @@ export function Window() {
     const { language, activeWindow, closeWindow } = useAppContext();
     const contentMap = useContentContext();
     const [selectedSlug, setSelectedSlug] = useState<string>("about"); // default to the about.md content when the window is first opened; when user clicks different sidebar item, update the selectedSlug accordingly
+    const [isDesktop, setIsDesktop] = useState<boolean>(window.innerWidth >= MIN_WIDTH && window.innerHeight >= MIN_HEIGHT);
+
+    useEffect(() => {
+        const handler = () => {
+            setIsDesktop(window.innerWidth >= MIN_WIDTH && window.innerHeight >= MIN_HEIGHT);
+        }
+
+        window.addEventListener("resize", handler);
+
+        return () => {
+            window.removeEventListener("resize", handler);
+        }
+    }, []);
 
     if (activeWindow === null) {
         return null;
@@ -34,16 +47,9 @@ export function Window() {
         return windowSidebarConfig[window];
     }
 
-    function isDesktopVersion() {
-        if (window.innerWidth < MIN_WIDTH || window.innerHeight < MIN_HEIGHT) {
-            return false;
-        }
-        return true;
-    }
-
     function isDropdownEnabled(window: Exclude<WindowType, null>) {
         // on desktop version, we show the sidebar and hide the dropdown; on mobile version, we hide the sidebar and show the dropdown (if the window supports sidebar)
-        return !isDesktopVersion() && isWindowSidebarEnabled(window);
+        return !isDesktop && isWindowSidebarEnabled(window);
     }
 
     function getSlugsAndTitles(window: Exclude<WindowType, null>) {
@@ -64,7 +70,7 @@ export function Window() {
                 <WindowHeader header={dict.window.header[activeWindow]} isDropdownEnabled={isDropdownEnabled(activeWindow)} items={getSlugsAndTitles(activeWindow)} selectedSlug={selectedSlug} setSelectedSlug={setSelectedSlug} onClose={() => closeWindow()} />
                 <div className="flex gap-2 w-full flex-1 min-h-0 mt-2 bg-lightgrey">
                     {/* note: the sidebar is fixed width and the content is flex-1 */}
-                    {isDesktopVersion() && isWindowSidebarEnabled(activeWindow) && <WindowSidebar items={getSlugsAndTitles(activeWindow)} selectedSlug={selectedSlug} setSelectedSlug={setSelectedSlug} />}
+                    {isDesktop && isWindowSidebarEnabled(activeWindow) && <WindowSidebar items={getSlugsAndTitles(activeWindow)} selectedSlug={selectedSlug} setSelectedSlug={setSelectedSlug} />}
                     <WindowContent contentDetail={getContentDetailBySlug(activeWindow, selectedSlug)} />
                 </div>
             </div>
