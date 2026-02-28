@@ -50,3 +50,5 @@ next-env.d.ts
 
 content/wormDiary/05-vanish.*.md
 content/wormDiary/06-no-spring-womb.*.md
+
+/public/image.png
