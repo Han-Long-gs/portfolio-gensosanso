@@ -48,6 +48,7 @@ readTimeMinutes: 3
 
 - Always create **both** `.en.md` and `.zh.md` — a missing language file throws at build time
 - Slug: lowercase, hyphen-separated only — no dots, underscores, or spaces
+- The slug is the public URL: `01-portfolio.en.md` → `gensosanso.com/projects/portfolio`. Renaming a slug breaks links that were already shared
 
 ---
 

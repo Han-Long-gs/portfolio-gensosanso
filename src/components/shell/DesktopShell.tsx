@@ -41,6 +41,9 @@ export function DesktopShell() {
         }
     }
 
+    // a visitor arriving from a shared link (e.g. /projects/portfolio) never clicked an icon, so selectedIcon is null; fall back to the open window so its icon still shows as selected
+    const highlightedIcon: IconType = selectedIcon ?? activeWindow;
+
     return (
         <div className="flex flex-col items-center justify-center overflow-auto min-h-screen bg-darkgreen">
             <div className="flex flex-col w-full h-screen">
@@ -49,10 +52,10 @@ export function DesktopShell() {
                     {/* Icons Container */}
                     {/* note icon has 100x100 fix size */}
                     <div className="flex flex-col max-w-[132px] p-4 gap-6" onClick={e => e.stopPropagation()}>
-                        <DesktopIcon name={dict.desktop.icon.aboutMe} icon="/desktop-icons/file.png" onClick={() => desktopIconClickHandler("aboutMe")} isSelected={selectedIcon === "aboutMe"} />
-                        <DesktopIcon name={dict.desktop.icon.projects} icon="/desktop-icons/folder.png" onClick={() => desktopIconClickHandler("projects")} isSelected={selectedIcon === "projects"} />
-                        <DesktopIcon name={dict.desktop.icon.wormDiary} icon="/desktop-icons/worm-diary.png" onClick={() => desktopIconClickHandler("wormDiary")} isSelected={selectedIcon === "wormDiary"} />
-                        <DesktopIcon name={dict.desktop.icon.music} icon="/desktop-icons/music.png" onClick={() => desktopIconClickHandler("music")} isSelected={selectedIcon === "music"} />
+                        <DesktopIcon name={dict.desktop.icon.aboutMe} icon="/desktop-icons/file.png" onClick={() => desktopIconClickHandler("aboutMe")} isSelected={highlightedIcon === "aboutMe"} />
+                        <DesktopIcon name={dict.desktop.icon.projects} icon="/desktop-icons/folder.png" onClick={() => desktopIconClickHandler("projects")} isSelected={highlightedIcon === "projects"} />
+                        <DesktopIcon name={dict.desktop.icon.wormDiary} icon="/desktop-icons/worm-diary.png" onClick={() => desktopIconClickHandler("wormDiary")} isSelected={highlightedIcon === "wormDiary"} />
+                        <DesktopIcon name={dict.desktop.icon.music} icon="/desktop-icons/music.png" onClick={() => desktopIconClickHandler("music")} isSelected={highlightedIcon === "music"} />
                     </div>
                     {/* Logo */}
                     <img src="/logo.png" alt="Logo" className="absolute bottom-4 right-4 w-[55%] h-auto" />
