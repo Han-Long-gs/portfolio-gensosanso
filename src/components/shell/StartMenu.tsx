@@ -16,6 +16,9 @@ export function StartMenu() {
                 <StartMenuItem icon="/list-icons/github.png" label={dict.taskBar.startMenu.github} href="https://github.com/Han-Long-gs" />
                 <hr className="border-t border-black my-1"></hr>
                 <StartMenuItem icon="/list-icons/info-circle.png" label={dict.taskBar.startMenu.email} onClick={() => window.open("mailto:hanlong.gensosanso@gmail.com", "_blank")} />
+                <hr className="border-t border-black border-dashed my-1"></hr>
+                {/* credit line: plain text, not clickable */}
+                <p className="p-2 text-xxs text-black/60">{dict.taskBar.startMenu.iconCredit}</p>
             </div>
         </div>
     )

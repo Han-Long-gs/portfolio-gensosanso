@@ -48,7 +48,7 @@ export function DesktopShell() {
         <div className="flex flex-col items-center justify-center overflow-auto min-h-screen bg-darkgreen">
             <div className="flex flex-col w-full h-screen">
                 {/* Desktop Area — flex-1 so it ends exactly where TaskBar begins; relative so absolute children are bounded here */}
-                <div className="flex-1 relative bg-black bg-cover bg-center" onClick={desktopBackgroundClickHandler}>
+                <div className="flex-1 relative bg-darkgreen bg-cover bg-center" onClick={desktopBackgroundClickHandler}>
                     {/* Icons Container */}
                     {/* note icon has 100x100 fix size */}
                     <div className="flex flex-col max-w-[132px] p-4 gap-6" onClick={e => e.stopPropagation()}>

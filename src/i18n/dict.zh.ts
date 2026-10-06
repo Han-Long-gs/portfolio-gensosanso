@@ -18,6 +18,7 @@ const dict_zh = {
             linkedin: "我的领英",
             github: "我的GitHub",
             email: "联系邮箱: hanlong.gensosanso@gmail.com",
+            iconCredit: "桌面图标设计：Ash Yang",
         }
     },
     viewport: {

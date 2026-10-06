@@ -18,6 +18,7 @@ const dict_en = {
             linkedin: "Find me on LinkedIn",
             github: "Find me on GitHub",
             email: "Contact: hanlong.gensosanso@gmail.com",
+            iconCredit: "Desktop icons designed by Ash Yang",
         }
     },
     viewport: {
